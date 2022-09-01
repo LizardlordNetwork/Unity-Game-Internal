@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Movement_Script : MonoBehaviour
 {
+    // setting the players movemnet speed. This can be changed while testing.
     public float PlayerMove = 5f;
+
+    //Adding a rigid body to the object so it can move
     public Rigidbody2D rb;
-    public string TreeTag;
+
+    //vector movement  in 2 dimensions
     Vector2 movement;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
