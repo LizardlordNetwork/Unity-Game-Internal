@@ -12,6 +12,7 @@ public class Score_Counter : MonoBehaviour
     public string WinText;
     // list of scores
     List<int> Scores = new List<int>();
+    public int highScore;
 
     // Start is called before the first frame update
     void Start()
@@ -28,8 +29,9 @@ public class Score_Counter : MonoBehaviour
         if (score == scoreWin)
         {
             ScoreText.text = WinText;
-         
+
         }
+        //highScore = Scores.Max();
     }
 
     private void OnTriggerEnter2D(Collider2D collisions)
@@ -50,14 +52,15 @@ public class Score_Counter : MonoBehaviour
             Scores.Add(score);
 
             //writing list to file
-            using (StreamWriter writer = new StreamWriter("C:\Users\18012.BAYFIELD\OneDrive - Bayfield High School\Computer Science\File ReaderWriter\File Writyer\File Writyer\bin\Debug\netcoreapp3.1")
-              {
-                  foreach (int s in Scores)
-                  {
-                     writer.WriteLine(s);
-                  }
-
-              }
+            using (StreamWriter writer = new StreamWriter("Score.txt"))
+            {
+                foreach (int s in Scores)
+                {
+                    writer.WriteLine(s);
+                }
+            }
+            
+                
         }
     }
 }
