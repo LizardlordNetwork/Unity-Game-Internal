@@ -31,7 +31,7 @@ public class Score_Counter : MonoBehaviour
             ScoreText.text = WinText;
 
         }
-        //highScore = Scores.Max();
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collisions)
