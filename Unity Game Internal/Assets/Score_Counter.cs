@@ -52,7 +52,7 @@ public class Score_Counter : MonoBehaviour
             Scores.Add(score);
 
             //writing list to file
-            using (StreamWriter writer = new StreamWriter("Score.txt"))
+            using (StreamWriter writer = new StreamWriter("Scores.txt"))
             {
                 foreach (int s in Scores)
                 {
