@@ -49,6 +49,8 @@ public class EnemyMovement : MonoBehaviour
         {
             float step = EnemyMove * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, target.position, step);
+            Vector2 direction = target.position - transform.position;
+            transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
             Shoot();
         }
         
@@ -61,7 +63,7 @@ public class EnemyMovement : MonoBehaviour
         if (attackSpeed <= canAttack)
         {
             //Spawning in the bullet using a bullet prefab and spawning it at the firepoint.
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, target.rotation /*firePoint.rotation*/);
 
             //getting a rigid body fro the bullet to apply force to.
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
