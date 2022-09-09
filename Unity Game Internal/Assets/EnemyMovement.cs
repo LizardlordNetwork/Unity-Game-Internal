@@ -45,12 +45,22 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //If there is a target, run this code.
         if (target != null)
         {
+            //Enemy movement speed per second
             float step = EnemyMove * Time.deltaTime;
+
+            //Allowing the eenmy to move towards the target position at the rate set above
             transform.position = Vector2.MoveTowards(transform.position, target.position, step);
+
+            //getting the direction of the target using vectors by taking away its postion from the postion of the target
             Vector2 direction = target.position - transform.position;
+
+            //rotating the enemy using the direction found earlier
             transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
+
+            //shooting in the direction
             Shoot();
         }
         
