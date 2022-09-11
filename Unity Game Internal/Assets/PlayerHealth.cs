@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -38,7 +39,14 @@ public class PlayerHealth : MonoBehaviour
         {
             //if health is equal to or less then 0 then setting it back to 0 so it doesnt cause issues with negatives
             Health = 0f;
-            
+
+            //When the player dies then Unity gets the index of the loaded scene and then takes 1 off and loads that index
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+
+
+
+            //GameObject bullet = Instantiate(bulletPrefab, firePoint.position, target.rotation /*firePoint.rotation*/);
+
         }
     }
 }
