@@ -23,4 +23,9 @@ public class Movement_Script : MonoBehaviour
     {
         rb.MovePosition(rb.position + movement.normalized * PlayerMove * Time.fixedDeltaTime);
     }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        Destroy(other.gameObject);
+    }
 }
