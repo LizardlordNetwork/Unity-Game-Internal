@@ -6,6 +6,10 @@ public class BulletDamage : MonoBehaviour
 {
     [SerializeField] private float attackDamage = 10f;
 
+    //The amonut of time before a bullet should despawn
+    private float despawnTime = 10f;
+    //How long the bullte as been alive
+    private float TimeAlive;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,8 +19,17 @@ public class BulletDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (despawnTime <= TimeAlive)
+        {
+            //resetting the attack timer back to 0 at the end of an attack
+            Destroy(gameObject);
+        }
+        else
+        {
+            TimeAlive += Time.deltaTime;
+        }
     }
+
 
     //private void OnCollision2D(Collision2D other)
     private void OnTriggerEnter2D(Collider2D other)

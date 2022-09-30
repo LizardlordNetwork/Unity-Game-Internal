@@ -7,10 +7,7 @@ public class EnemyMovement : MonoBehaviour
     // setting the players movemnet speed. This can be changed while testing.
     public float EnemyMove = 5f;
     private Transform target;
-    [SerializeField] private float attackDamage = 10f;
-    //Setting an attack speed for the enemy. This measn that they deal damage at a certain rate instead off every frame.
-    [SerializeField] private float attackSpeed = 1f;
-    private float canAttack;
+    
 
     //Variables for Enemy shhoting
     public Transform firePoint;
@@ -23,6 +20,11 @@ public class EnemyMovement : MonoBehaviour
 
     //Making a private variable but setting it as a Serialize field to allow it to be edited inside the unity editor.
     [SerializeField] private float maxHealth = 100f;
+
+    
+    //Setting an attack speed for the enemy. This measn that they deal damage at a certain rate instead off every frame.
+    [SerializeField] private float attackSpeed = 1f;
+    private float canAttack;
 
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -98,26 +100,7 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    //Method for when the player collides with the enemy over a period of time to take damage.
-    private void OnCollisionStay2D(Collision2D other)
-    {
-        //comapring if the game object has the player tag
-        if (other.gameObject.tag == "Player")
-        {
-            if (attackSpeed <= canAttack)
-            {
-                //getting the players health from another script and then taking way the attack damage from it
-                other.gameObject.GetComponent<PlayerHealth>().UpdateHealth(-attackDamage);
-                //resetting the attack timer back to 0 at the end of an attack
-                canAttack = 0f; 
-            }
-            else
-            {
-                canAttack += Time.deltaTime;
-            }
-            
-        }
-    }
+    
 
     //Method for when health updates (gains or loses health) 
     public void UpdateHealth(float modification)
@@ -134,12 +117,12 @@ public class EnemyMovement : MonoBehaviour
         {
             /*if health is equal to or less then 0 then setting it back to 0 so it doesnt cause issues with negatives
             Health = 0f;*/
-            
+            Die();
         }
     }
 
     void Die()
     {
-        Destroy(GameObject);
+        Destroy(gameObject);
     }
 }

@@ -151,6 +151,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerMove: 6
   rb: {fileID: 3147225610557575871}
+  attackDamage: 1000
+  attackSpeed: 0.1
 --- !u!114 &3147225610557575811
 MonoBehaviour:
   m_ObjectHideFlags: 0

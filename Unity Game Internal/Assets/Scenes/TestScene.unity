@@ -1364,7 +1364,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.2281554, y: 1}
+    m_SensorSize: {x: 2.255583, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -31758,6 +31758,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 3147225610557575869, guid: a4f0fdd5750584246b151a175524bb5b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 63725c86d1bcee34aad962b8f159fe47, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4f0fdd5750584246b151a175524bb5b, type: 3}
 --- !u!1001 &7145598721470041708
