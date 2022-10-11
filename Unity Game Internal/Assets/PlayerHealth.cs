@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,13 +12,19 @@ public class PlayerHealth : MonoBehaviour
     //Making a private variable but setting it as a Serialize field to allow it to be edited inside the unity editor.
     [SerializeField] private float maxHealth = 100f;
 
+<<<<<<< Updated upstream
 
+=======
+    public HealthBar HealthBar;
+>>>>>>> Stashed changes
 
     // Start is called before the first frame update
     void Start()
     {
         //setting health to the maximum health at the start of the game
         Health = maxHealth;
+        
+        HealthBar.SetMaxHealth(Convert.ToInt32(maxHealth));
     }
 
     // Update is called once per frame
@@ -31,6 +38,8 @@ public class PlayerHealth : MonoBehaviour
     {
         //Adding the modifacation  to the health
         Health += modification;
+        
+        HealthBar.SetHealth(Convert.ToInt32(Health));
 
         //If the health is greater then the max health then setting it back to the max health
         if (Health > maxHealth)
