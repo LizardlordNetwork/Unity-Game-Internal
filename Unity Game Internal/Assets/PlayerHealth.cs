@@ -12,11 +12,11 @@ public class PlayerHealth : MonoBehaviour
     //Making a private variable but setting it as a Serialize field to allow it to be edited inside the unity editor.
     [SerializeField] private float maxHealth = 100f;
 
-<<<<<<< Updated upstream
 
-=======
+
+
     public HealthBar HealthBar;
->>>>>>> Stashed changes
+
 
     // Start is called before the first frame update
     void Start()
