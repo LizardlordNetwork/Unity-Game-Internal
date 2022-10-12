@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Collectable
   - Enemy
+  - HealthUp
   layers:
   - Default
   - TransparentFX

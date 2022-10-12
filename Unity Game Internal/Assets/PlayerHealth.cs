@@ -11,8 +11,8 @@ public class PlayerHealth : MonoBehaviour
 
     //Making a private variable but setting it as a Serialize field to allow it to be edited inside the unity editor.
     [SerializeField] private float maxHealth = 100f;
-
-
+    
+    public float HealthBoost = 20f;
 
 
     public HealthBar HealthBar;
@@ -24,6 +24,7 @@ public class PlayerHealth : MonoBehaviour
         //setting health to the maximum health at the start of the game
         Health = maxHealth;
         
+        //setting the health bar to full at the start of the game
         HealthBar.SetMaxHealth(Convert.ToInt32(maxHealth));
     }
 
@@ -38,7 +39,8 @@ public class PlayerHealth : MonoBehaviour
     {
         //Adding the modifacation  to the health
         Health += modification;
-        
+
+        //updating the health bar when there is a modification to the players health
         HealthBar.SetHealth(Convert.ToInt32(Health));
 
         //If the health is greater then the max health then setting it back to the max health
@@ -55,8 +57,24 @@ public class PlayerHealth : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
 
 
-
             //GameObject bullet = Instantiate(bulletPrefab, firePoint.position, target.rotation /*firePoint.rotation*/);
+        }
+    }
+
+    //On colliding with a trigger run this code
+    private void OnTriggerEnter2D(Collider2D collisions)
+    {
+        //On collison checking if the "HealthUp" tag is on the object.
+        if (collisions.CompareTag("HealthUp"))
+        {
+            //debug to make sure it works
+            Debug.Log("Health Up");
+
+            //running the update health method from above and passing in the health boost variable as the modification
+            UpdateHealth(HealthBoost);
+
+            //destroying the object
+            Destroy(collisions.gameObject);
 
         }
     }
