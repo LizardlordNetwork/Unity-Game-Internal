@@ -32,7 +32,7 @@ public class EnemyMovement : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             target = other.transform;
-            Debug.Log(target);
+            //Debug.Log(target);
         }
     }
 
@@ -83,13 +83,17 @@ public class EnemyMovement : MonoBehaviour
         if (attackSpeed <= canAttack)
         {
             //Spawning in the bullet using a bullet prefab and spawning it at the firepoint.
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, target.rotation /*firePoint.rotation*/);
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
             //getting a rigid body fro the bullet to apply force to.
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
             //applying force to the rigid body. 
             rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+
+            //Vector2 direction = firePoint.rotation;
+            //transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
+
 
             //resetting the attack timer back to 0 at the end of an attack
             canAttack = 0f;
@@ -106,7 +110,7 @@ public class EnemyMovement : MonoBehaviour
     public void UpdateHealth(float modification)
     {
         //Adding the modifacation  to the health
-        Health += modification;
+        Health -= modification;
 
         //If the health is greater then the max health then setting it back to the max health
         if (Health > maxHealth)

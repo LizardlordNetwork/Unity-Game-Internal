@@ -11,9 +11,12 @@ public class BulletDamage : MonoBehaviour
     //How long the bullte as been alive
     private float TimeAlive;
     // Start is called before the first frame update
+
+    //public Transfrom Direction;
+
     void Start()
     {
-        
+        //transform.LookAt(gameObject.GetComponent<EnemyMovement>().firePoint.rotation);
     }
 
     // Update is called once per frame
@@ -28,13 +31,14 @@ public class BulletDamage : MonoBehaviour
         {
             TimeAlive += Time.deltaTime;
         }
+        //transform.rotation = gameObject.GetComponent<EnemyMovement>().firePoint.rotation;
     }
 
 
     //private void OnCollision2D(Collision2D other)
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Hit");
+        //Debug.Log("Hit");
         //On collison checking if the "Collectable" tag is on the object.
         if (other.gameObject.tag == "Player")
         {

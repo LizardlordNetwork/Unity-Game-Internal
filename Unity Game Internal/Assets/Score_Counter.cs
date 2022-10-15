@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.IO;
+using System;
 
 public class Score_Counter : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Score_Counter : MonoBehaviour
     // list of scores
     List<int> Scores = new List<int>();
     public int highScore;
+    string streamreaderline;
 
     // Start is called before the first frame update
     void Start()
@@ -26,9 +28,21 @@ public class Score_Counter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (score == scoreWin)
+        using (StreamReader sr = new StreamReader("HighScores.txt"))
         {
-            ScoreText.text = WinText;
+            streamreaderline = sr.ReadLine();
+            highScore = Convert.ToInt32(streamreaderline);
+
+        }
+
+
+        if (score > highScore)
+        {
+            using (StreamWriter writer = new StreamWriter("HighScores.txt"))
+            {
+                writer.WriteLine(score);
+            }
+                ScoreText.text = WinText;
 
         }
         
@@ -59,8 +73,7 @@ public class Score_Counter : MonoBehaviour
                     writer.WriteLine(s);
                 }
             }
-            
-                
+   
         }
     }
 }
