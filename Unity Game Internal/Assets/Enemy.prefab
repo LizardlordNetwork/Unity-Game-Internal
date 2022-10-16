@@ -171,6 +171,8 @@ MonoBehaviour:
   bulletForce: 10
   maxHealth: 100
   attackSpeed: 1
+  killscore: 25
+  Player: {fileID: 3147225610557575865, guid: a4f0fdd5750584246b151a175524bb5b, type: 3}
 --- !u!50 &2229502219080282384
 Rigidbody2D:
   serializedVersion: 4

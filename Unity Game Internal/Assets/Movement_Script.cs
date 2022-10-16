@@ -13,7 +13,8 @@ public class Movement_Script : MonoBehaviour
     //a variable for vector movement in 2 dimensions
     Vector2 movement;
 
-    [SerializeField] private float attackDamage = 50f;
+    public float attackDamage = 50f;
+    public float attackBoost = 50f;
     //Setting an attack speed for the enemy. This measn that they deal damage at a certain rate instead off every frame.
     [SerializeField] private float attackSpeed = 0.2f;
     private float canAttack;
@@ -144,25 +145,29 @@ public class Movement_Script : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
-    //Method for when the player collides with the enemy over a period of time to take damage.
-    /*private void OnCollisionStay2D(Collision2D other)
+    //On colliding with a trigger run this code
+    private void OnTriggerEnter2D(Collider2D collisions)
     {
-        //comapring if the game object has the player tag
-        if (other.gameObject.tag == "Enemy")
+        //On collison checking if the "HealthUp" tag is on the object.
+        if (collisions.CompareTag("AttackUp"))
         {
-            if (attackSpeed <= canAttack)
-            {
-                //getting the players health from another script and then taking way the attack damage from it
-                other.gameObject.GetComponent<EnemyMovement>().UpdateHealth(-attackDamage);
-                //resetting the attack timer back to 0 at the end of an attack
-                canAttack = 0f;
-            }
-            else
-            {
-                canAttack += Time.deltaTime;
-            }
+            //debug to make sure it works
+            Debug.Log("Attack Up");
+
+            //running the update health method from above and passing in the health boost variable as the modification
+            AttackUp(attackBoost);
+
+            //destroying the object
+            Destroy(collisions.gameObject);
 
         }
-    }*/
+    }
+
+    void AttackUp(float modification)
+    {
+        //Adding the modifacation  to the health
+        attackDamage += modification;
+    }
+
 
 }

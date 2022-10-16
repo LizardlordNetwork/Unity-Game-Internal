@@ -26,6 +26,12 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float attackSpeed = 1f;
     private float canAttack;
 
+    public int killscore = 25;
+
+    public GameObject Player;
+
+    
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -61,7 +67,7 @@ public class EnemyMovement : MonoBehaviour
             //Enemy movement speed per second
             float step = EnemyMove * Time.deltaTime;
 
-            //Allowing the eenmy to move towards the target position at the rate set above
+            //Allowing the enemy to move towards the target position at the rate set above
             transform.position = Vector2.MoveTowards(transform.position, target.position, step);
 
             //getting the direction of the target using vectors by taking away its postion from the postion of the target
@@ -125,7 +131,7 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    void Die()
+    public void Die()
     {
         Destroy(gameObject);
     }

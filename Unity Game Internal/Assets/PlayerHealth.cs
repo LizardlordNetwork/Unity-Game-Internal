@@ -11,10 +11,11 @@ public class PlayerHealth : MonoBehaviour
 
     //Making a private variable but setting it as a Serialize field to allow it to be edited inside the unity editor.
     [SerializeField] private float maxHealth = 100f;
-    
+
+    //The amount of health gained when collecting The Halth Powerup.
     public float HealthBoost = 20f;
 
-
+    //Creating the Healthbar as object in the script.
     public HealthBar HealthBar;
 
 
