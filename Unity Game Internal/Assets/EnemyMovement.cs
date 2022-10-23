@@ -7,10 +7,7 @@ public class EnemyMovement : MonoBehaviour
     // setting the players movemnet speed. This can be changed while testing.
     public float EnemyMove = 5f;
     private Transform target;
-    [SerializeField] private float attackDamage = 10f;
-    //Setting an attack speed for the enemy. This measn that they deal damage at a certain rate instead off every frame.
-    [SerializeField] private float attackSpeed = 1f;
-    private float canAttack;
+    
 
     //Variables for Enemy shhoting
     public Transform firePoint;
@@ -18,12 +15,30 @@ public class EnemyMovement : MonoBehaviour
     //setting the force of the bullet
     public float bulletForce = 10f;
 
+    //Creating the enemies health and setting it as a variable. Making it a float to allow decimals.
+    private float Health = 0f;
+
+    //Making a private variable but setting it as a Serialize field to allow it to be edited inside the unity editor.
+    [SerializeField] private float maxHealth = 100f;
+
+    
+    //Setting an attack speed for the enemy. This measn that they deal damage at a certain rate instead off every frame.
+    [SerializeField] private float attackSpeed = 1f;
+    private float canAttack;
+
+    public int killscore = 25;
+
+    public GameObject Player;
+
+    
+
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
         {
             target = other.transform;
-            Debug.Log(target);
+            //Debug.Log(target);
         }
     }
 
@@ -39,7 +54,8 @@ public class EnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //setting health to the maximum health at the start of the game
+        Health = maxHealth;
     }
 
     // Update is called once per frame
@@ -51,7 +67,7 @@ public class EnemyMovement : MonoBehaviour
             //Enemy movement speed per second
             float step = EnemyMove * Time.deltaTime;
 
-            //Allowing the eenmy to move towards the target position at the rate set above
+            //Allowing the enemy to move towards the target position at the rate set above
             transform.position = Vector2.MoveTowards(transform.position, target.position, step);
 
             //getting the direction of the target using vectors by taking away its postion from the postion of the target
@@ -73,13 +89,17 @@ public class EnemyMovement : MonoBehaviour
         if (attackSpeed <= canAttack)
         {
             //Spawning in the bullet using a bullet prefab and spawning it at the firepoint.
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, target.rotation /*firePoint.rotation*/);
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
             //getting a rigid body fro the bullet to apply force to.
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
             //applying force to the rigid body. 
             rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
+
+            //Vector2 direction = firePoint.rotation;
+            //transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
+
 
             //resetting the attack timer back to 0 at the end of an attack
             canAttack = 0f;
@@ -90,24 +110,29 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    //Method for when the player collides with the enemy over a period of time to take damage.
-    private void OnCollisionStay2D(Collision2D other)
+    
+
+    //Method for when health updates (gains or loses health) 
+    public void UpdateHealth(float modification)
     {
-        //comapring if the game object has the player tag
-        if (other.gameObject.tag == "Player")
+        //Adding the modifacation  to the health
+        Health -= modification;
+
+        //If the health is greater then the max health then setting it back to the max health
+        if (Health > maxHealth)
         {
-            if (attackSpeed <= canAttack)
-            {
-                //getting the players health from another script and then taking way the attack damage from it
-                other.gameObject.GetComponent<PlayerHealth>().UpdateHealth(-attackDamage);
-                //resetting the attack timer back to 0 at the end of an attack
-                canAttack = 0f; 
-            }
-            else
-            {
-                canAttack += Time.deltaTime;
-            }
-            
+            Health = maxHealth;
         }
+        else if (Health <= 0f)
+        {
+            /*if health is equal to or less then 0 then setting it back to 0 so it doesnt cause issues with negatives
+            Health = 0f;*/
+            Die();
+        }
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
     }
 }
