@@ -306,11 +306,10 @@ RectTransform:
   m_Father: {fileID: 1366805852}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 174.45645, y: -32.385284}
-  m_SizeDelta: {x: 344.9129, y: 60.7706}
-c9c610bbc75c8de859d9dafe58d1b852888d7ace
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -0.00029755, y: 77.1765}
+  m_SizeDelta: {x: 162, y: 60.123703}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &215562430
 MonoBehaviour:
@@ -1624,7 +1623,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.2406948, y: 1}
+    m_SensorSize: {x: 2.111969, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
