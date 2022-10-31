@@ -133,6 +133,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void Die()
     {
+        Score_Counter.score += 5;
         Destroy(gameObject);
     }
 }

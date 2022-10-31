@@ -8,7 +8,7 @@ using System;
 public class Score_Counter : MonoBehaviour
 {
     public TextMeshProUGUI ScoreText;
-    public int score;
+    public static int score;
     
     //List of scores.
     List<int> Scores = new List<int>();
