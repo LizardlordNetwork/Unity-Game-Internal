@@ -1,10 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-   public static bool GameisPaused = false;
+    public static bool GameisPaused = false;
+    public GameObject pauseMenuUI;
+    float TimeStopped = 0f;
+    float NormalRate = 1f;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        Resume();
+    }
 
     // Update is called once per frame
     void Update()
@@ -12,14 +22,43 @@ public class PauseMenu : MonoBehaviour
         //If the space key is pressed.
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            //Pause the game.
-             GameisPaused = true;
+            //If game isn't paused.
+            if (GameisPaused == false)
+            {
+                //Pause the game.
+                Pause();
+            }
+            else
+            {
+                //Resume the game
+                Resume();
+            }
         }
 
-        if (GameisPaused == true)
-        {
-            //Enable Pause Menu.
-        }
+
+    }
+    public void Resume()
+    {
+        //Disabling the pause menu.
+        pauseMenuUI.SetActive(false);
+        //Setting time to run at a normal speed.
+        Time.timeScale = NormalRate;
+        //Setting that the game is paused to flase.
+        GameisPaused = false;
+    }
+    void Pause()
+    {
+        //Enabling the pause menu.
+        pauseMenuUI.SetActive(true);
+        //Stoping time while pause mnu is active.
+        Time.timeScale = TimeStopped;
+        //Setting that the game is paused to true.
+        GameisPaused = true;
     }
 
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene(0);
+
+    }
 }
