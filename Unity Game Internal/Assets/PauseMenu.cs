@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenuUI;
     float TimeStopped = 0f;
     float NormalRate = 1f;
+    string MenuScene = "Menu";
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +51,7 @@ public class PauseMenu : MonoBehaviour
     {
         //Enabling the pause menu.
         pauseMenuUI.SetActive(true);
-        //Stoping time while pause mnu is active.
+        //Stoping time while pause menu is active.
         Time.timeScale = TimeStopped;
         //Setting that the game is paused to true.
         GameisPaused = true;
@@ -58,7 +59,13 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMenu()
     {
-        SceneManager.LoadScene(0);
+        //Loads the Menu when the method is called.
+        SceneManager.LoadScene(MenuScene);
+    }
 
+    public void QuitGame()
+    {
+        //Quits the application.
+        Application.Quit();
     }
 }
