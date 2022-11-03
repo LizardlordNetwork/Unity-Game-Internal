@@ -17,6 +17,8 @@ public class Score_Counter : MonoBehaviour
     //The high score.
     public int highScore;
     public int StartScore = 0;
+    public int maxScore = 480;
+    public GameObject WinScreen;
 
     //The line read by the stream reader.
     string streamreaderline;
@@ -32,7 +34,7 @@ public class Score_Counter : MonoBehaviour
 
         if (ResetScore == false)
         {
-            ScoreReset();
+            //ScoreReset();
             UpdateScore();
         }
 
@@ -49,9 +51,11 @@ public class Score_Counter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         UpdateScore();
-
+        if (score == maxScore)
+        {
+            WinScreen.SetActive(true);
+        }
     }
 
     public void UpdateScore()
@@ -123,21 +127,21 @@ public class Score_Counter : MonoBehaviour
 
         }
     }
-    public void ScoreReset()
-    {
-        if (ResetScore == false)
-        {
-            //Writing the new highscore to the text document.
-            using (StreamWriter writer = new StreamWriter(PathFinder()))
-            {
-                writer.WriteLine(StartScore);
-            }
-            score = StartScore;
-            highScore = StartScore;
-            ResetScore = true;
-        }
+    // public void ScoreReset()
+    // {
+    //     if (ResetScore == false)
+    //     {
+    //         //Writing the new highscore to the text document.
+    //         using (StreamWriter writer = new StreamWriter(PathFinder()))
+    //         {
+    //             writer.WriteLine(StartScore);
+    //         }
+    //         score = StartScore;
+    //         highScore = StartScore;
+    //         ResetScore = true;
+    //     }
 
-    }
+    // }
 
     string PathFinder()
     {

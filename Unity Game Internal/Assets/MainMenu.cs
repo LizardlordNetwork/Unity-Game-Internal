@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
     public bool ScoreReset = false;
     public GameObject ScoreScript;
     public int StartScore = 0;
+    string FirstScene = "Level 1";
     void Start()
     {
         if (ScoreReset == false)
@@ -22,7 +23,7 @@ public class MainMenu : MonoBehaviour
     }
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(FirstScene);
     }
     public void QuitGame()
     {
@@ -45,9 +46,12 @@ public class MainMenu : MonoBehaviour
     }*/
     public void CreateHSFile()
     {
+        //Getting the path of the text document.
         string CheckPath = Application.dataPath + "/HighScores.txt";
+        //If the file path doesn't exist.
         if (!File.Exists(CheckPath))
         {
+            //Create a new file and reset the high score.
             File.WriteAllText(CheckPath, Convert.ToString(StartScore));
 
         }

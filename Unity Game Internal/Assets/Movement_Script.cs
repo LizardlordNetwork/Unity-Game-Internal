@@ -73,7 +73,7 @@ public class Movement_Script : MonoBehaviour
             {
                 PlayerSpriteRenderer.flipX = false;
             }
-                
+
         }
     }
 
@@ -82,14 +82,14 @@ public class Movement_Script : MonoBehaviour
         //detect enemies in range of attack
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, EnemyLayers);
 
-        
-          //looping through all the enemies detected  
-         foreach (Collider2D enemy in hitEnemies)
-         {
+
+        //looping through all the enemies detected  
+        foreach (Collider2D enemy in hitEnemies)
+        {
             //if there is no enemy then say "miss" in the debug log
             if (enemy == null)
             {
-                    Debug.Log("Miss");
+                Debug.Log("Miss");
             }
             else
             {
@@ -152,7 +152,7 @@ public class Movement_Script : MonoBehaviour
         if (collisions.CompareTag("AttackUp"))
         {
             //debug to make sure it works
-            Debug.Log("Attack Up");
+            Debug.Log("Attack Up(playerscipt)");
 
             //running the update health method from above and passing in the health boost variable as the modification
             AttackUp(attackBoost);

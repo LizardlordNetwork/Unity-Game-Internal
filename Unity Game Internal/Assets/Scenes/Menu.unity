@@ -602,8 +602,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Movement:  WASD keys               Combat: Point and Click with mouse   
-    \nPause menu: Escape                     Survive as long as possible against
-    the enemies and collect powerups\n"
+    \nPause menu: Escape                     Destroy all the enemies and collect
+    all of the coins in order to win. Collect Powerups to get boosts.\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -612,8 +612,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -747,8 +747,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4281479730
+  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1624,6 +1624,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 050712f0fa32c9c4e8bf4ced16507490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ScoreReset: 0
+  ScoreScript: {fileID: 0}
+  StartScore: 0
 --- !u!1 &1758772118
 GameObject:
   m_ObjectHideFlags: 0
