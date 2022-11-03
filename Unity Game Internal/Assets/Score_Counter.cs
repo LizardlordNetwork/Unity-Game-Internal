@@ -8,36 +8,59 @@ using System;
 public class Score_Counter : MonoBehaviour
 {
     public TextMeshProUGUI ScoreText;
+    public TextMeshProUGUI HighScoreText;
     public static int score;
-    
+
     //List of scores.
     List<int> Scores = new List<int>();
 
     //The high score.
     public int highScore;
+    public int StartScore = 0;
 
     //The line read by the stream reader.
     string streamreaderline;
 
-    //The text displayed when the player beats the high score.
-    public string WinText;
+    int CollectibleScore = 10;
+
+    public bool ResetScore = false;
 
     //Start is called before the first frame update.
     void Start()
     {
+
+
+        if (ResetScore == false)
+        {
+            ScoreReset();
+            UpdateScore();
+        }
+
         //Setting score to 0 at the start of the game.
-        score = 0;
+        score = StartScore;
 
         //The text at the start of the game.
         ScoreText.text = "score: " + score;
-        
+        //HighScoreText.text = "Highscore: " + highScore;
+        Debug.Log("Highscore: " + highScore);
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        UpdateScore();
+
+    }
+
+    public void UpdateScore()
+    {
+        //score += scoreUpdate;
+        ScoreText.text = "score: " + score;
+
         //Reading the current score drom the text document
-        using (StreamReader sr = new StreamReader("HighScores.txt"))
+        using (StreamReader sr = new StreamReader(PathFinder()))
         {
             streamreaderline = sr.ReadLine();
             highScore = Convert.ToInt32(streamreaderline);
@@ -48,23 +71,19 @@ public class Score_Counter : MonoBehaviour
         if (score >= highScore)
         {
             //Writing the new highscore to the text document.
-            using (StreamWriter writer = new StreamWriter("HighScores.txt"))
+            using (StreamWriter writer = new StreamWriter(PathFinder()))
             {
                 writer.WriteLine(score);
             }
             //Updating the score on the UI.
-            ScoreText.text = "Highscore: " + score;
+            HighScoreText.text = "Highscore: " + score;
 
         }
-        
-    }
-    
-    public void UpdateScore(int scoreUpdate)
-    {
-        ScoreText.text = "score: " + score;
-       
-        score += scoreUpdate;
-        
+        else
+        {
+            HighScoreText.text = "Highscore: " + highScore;
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collisions)
@@ -76,7 +95,7 @@ public class Score_Counter : MonoBehaviour
             Destroy(collisions.gameObject);
 
             //adding 10 to the score
-            score = score + 10;
+            score = score + CollectibleScore;
 
             //updating the score text
             ScoreText.text = "score: " + score;
@@ -92,7 +111,38 @@ public class Score_Counter : MonoBehaviour
                     writer.WriteLine(s);
                 }
             }
-   
+
         }
     }
+    public void CreateHSFile()
+    {
+        string CheckPath = Application.dataPath + "/HighScores.txt";
+        if (!File.Exists(CheckPath))
+        {
+            File.WriteAllText(CheckPath, Convert.ToString(highScore));
+
+        }
+    }
+    public void ScoreReset()
+    {
+        if (ResetScore == false)
+        {
+            //Writing the new highscore to the text document.
+            using (StreamWriter writer = new StreamWriter(PathFinder()))
+            {
+                writer.WriteLine(StartScore);
+            }
+            score = StartScore;
+            highScore = StartScore;
+            ResetScore = true;
+        }
+
+    }
+
+    string PathFinder()
+    {
+        string CheckPath = Application.dataPath + "/HighScores.txt";
+        return CheckPath;
+    }
+
 }
