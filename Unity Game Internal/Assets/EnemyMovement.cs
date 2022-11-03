@@ -21,17 +21,25 @@ public class EnemyMovement : MonoBehaviour
     //Making a private variable but setting it as a Serialize field to allow it to be edited inside the unity editor.
     [SerializeField] private float maxHealth = 100f;
 
-
     //Setting an attack speed for the enemy. This measn that they deal damage at a certain rate instead off every frame.
     [SerializeField] private float attackSpeed = 1f;
     private float canAttack;
 
+    //Amount of score gained by destroying an enemy;
     public int killscore = 25;
 
     public GameObject Player;
 
+    //Sprite Renderer for enemy.
+    private SpriteRenderer EnemySprite;
 
+    public float flashTime = 0.1f;
 
+    private void Awake()
+    {
+        // get a reference to the SpriteRenderer component on this gameObject
+        EnemySprite = GetComponent<SpriteRenderer>();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -117,6 +125,7 @@ public class EnemyMovement : MonoBehaviour
     {
         //Adding the modifacation  to the health
         Health -= modification;
+        StartCoroutine(DamageFlash());
 
         //If the health is greater then the max health then setting it back to the max health
         if (Health > maxHealth)
@@ -125,15 +134,29 @@ public class EnemyMovement : MonoBehaviour
         }
         else if (Health <= 0f)
         {
-            /*if health is equal to or less then 0 then setting it back to 0 so it doesnt cause issues with negatives
-            Health = 0f;*/
+            //If health is equal to or less then 0 then setting it back to 0 so it doesnt cause issues with negatives.
+            //Health = 0f;
             Die();
         }
     }
 
     public void Die()
     {
+        //Increase the players socre by the killscore.
         Score_Counter.score += killscore;
+        //Destroy the game object.
         Destroy(gameObject);
+    }
+
+    public IEnumerator DamageFlash()
+    {
+        //Debug log to show method was called.
+        Debug.Log("EnemyFlashesRed");
+        //Change sprite colour to red.
+        EnemySprite.color = Color.red;
+        //Wait for the desired flashtime.
+        yield return new WaitForSeconds(flashTime);
+        //Change colour to normal.
+        EnemySprite.color = Color.white;
     }
 }

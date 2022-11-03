@@ -15,6 +15,7 @@ public class Movement_Script : MonoBehaviour
 
     public float attackDamage = 50f;
     public float attackBoost = 50f;
+    public float boostTime = 30f;
     //Setting an attack speed for the enemy. This measn that they deal damage at a certain rate instead off every frame.
     [SerializeField] private float attackSpeed = 0.2f;
     private float canAttack;
@@ -26,6 +27,7 @@ public class Movement_Script : MonoBehaviour
 
     //Sprite renderer
     private SpriteRenderer PlayerSpriteRenderer;
+    public SpriteRenderer PlayerArm;
 
 
     // This function is called just one time by Unity the moment the component loads
@@ -151,11 +153,8 @@ public class Movement_Script : MonoBehaviour
         //On collison checking if the "HealthUp" tag is on the object.
         if (collisions.CompareTag("AttackUp"))
         {
-            //debug to make sure it works
-            Debug.Log("Attack Up(playerscipt)");
-
-            //running the update health method from above and passing in the health boost variable as the modification
-            AttackUp(attackBoost);
+            //Starting a coroutine for the attack powerup duration.
+            StartCoroutine(AttackPowerup(attackBoost));
 
             //destroying the object
             Destroy(collisions.gameObject);
@@ -167,6 +166,29 @@ public class Movement_Script : MonoBehaviour
     {
         //Adding the modifacation  to the health
         attackDamage += modification;
+    }
+
+    public IEnumerator AttackPowerup(float modification)
+    {
+        Debug.Log("Power level Increasing");
+        ColourChangeRed(PlayerSpriteRenderer);
+        ColourChangeRed(PlayerArm);
+        attackDamage += modification;
+        yield return new WaitForSeconds(boostTime);
+        ColourChangeWhite(PlayerSpriteRenderer);
+        ColourChangeWhite(PlayerArm);
+        attackDamage -= modification;
+    }
+
+    public void ColourChangeRed(SpriteRenderer ObjectSprite)
+    {
+        //Change sprite colour to red.
+        ObjectSprite.color = Color.red;
+    }
+    public void ColourChangeWhite(SpriteRenderer ObjectSprite)
+    {
+        //Change sprite colour to white.
+        ObjectSprite.color = Color.white;
     }
 
 

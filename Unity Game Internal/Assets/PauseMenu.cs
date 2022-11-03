@@ -7,6 +7,9 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GameisPaused = false;
     public GameObject pauseMenuUI;
+    public GameObject controlsMenu;
+    public GameObject ButtonsMenu;
+    public GameObject ConfirmMenu;
     float TimeStopped = 0f;
     float NormalRate = 1f;
     string MenuScene = "Menu";
@@ -42,6 +45,8 @@ public class PauseMenu : MonoBehaviour
     {
         //Disabling the pause menu.
         pauseMenuUI.SetActive(false);
+        controlsMenu.SetActive(false);
+        ConfirmMenu.SetActive(false);
         //Setting time to run at a normal speed.
         Time.timeScale = NormalRate;
         //Setting that the game is paused to flase.
@@ -51,6 +56,7 @@ public class PauseMenu : MonoBehaviour
     {
         //Enabling the pause menu.
         pauseMenuUI.SetActive(true);
+        ButtonsMenu.SetActive(true);
         //Stoping time while pause menu is active.
         Time.timeScale = TimeStopped;
         //Setting that the game is paused to true.
