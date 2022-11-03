@@ -18,13 +18,16 @@ public class PlayerHealth : MonoBehaviour
     //Creating the Healthbar as object in the script.
     public HealthBar HealthBar;
 
+    public GameObject DeathScreenUI;
+    float TimeStopped = 0f;
+
 
     // Start is called before the first frame update
     void Start()
     {
         //setting health to the maximum health at the start of the game
         Health = maxHealth;
-        
+
         //setting the health bar to full at the start of the game
         HealthBar.SetMaxHealth(Convert.ToInt32(maxHealth));
     }
@@ -32,7 +35,7 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     //Method for when health updates (gains or loses health) 
@@ -54,11 +57,8 @@ public class PlayerHealth : MonoBehaviour
             //if health is equal to or less then 0 then setting it back to 0 so it doesnt cause issues with negatives
             Health = 0f;
 
-            //When the player dies then Unity gets the index of the loaded scene and then takes 1 off and loads that index
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-
-
-            //GameObject bullet = Instantiate(bulletPrefab, firePoint.position, target.rotation /*firePoint.rotation*/);
+            //When the player dies then call the Game over method.
+            GameOver();
         }
     }
 
@@ -78,5 +78,13 @@ public class PlayerHealth : MonoBehaviour
             Destroy(collisions.gameObject);
 
         }
+    }
+
+    void GameOver()
+    {
+        //Activate the game over screen.
+        DeathScreenUI.SetActive(true);
+        //Stop Time.
+        Time.timeScale = TimeStopped;
     }
 }

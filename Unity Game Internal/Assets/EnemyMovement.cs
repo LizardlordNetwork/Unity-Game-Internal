@@ -7,7 +7,7 @@ public class EnemyMovement : MonoBehaviour
     // setting the players movemnet speed. This can be changed while testing.
     public float EnemyMove = 5f;
     private Transform target;
-    
+
 
     //Variables for Enemy shhoting
     public Transform firePoint;
@@ -21,7 +21,7 @@ public class EnemyMovement : MonoBehaviour
     //Making a private variable but setting it as a Serialize field to allow it to be edited inside the unity editor.
     [SerializeField] private float maxHealth = 100f;
 
-    
+
     //Setting an attack speed for the enemy. This measn that they deal damage at a certain rate instead off every frame.
     [SerializeField] private float attackSpeed = 1f;
     private float canAttack;
@@ -30,7 +30,7 @@ public class EnemyMovement : MonoBehaviour
 
     public GameObject Player;
 
-    
+
 
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -47,7 +47,7 @@ public class EnemyMovement : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             target = null;
-            
+
         }
     }
 
@@ -79,12 +79,12 @@ public class EnemyMovement : MonoBehaviour
             //shooting in the direction
             Shoot();
         }
-        
+
     }
 
     void Shoot()
     {
-        
+
 
         if (attackSpeed <= canAttack)
         {
@@ -110,7 +110,7 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    
+
 
     //Method for when health updates (gains or loses health) 
     public void UpdateHealth(float modification)
@@ -133,6 +133,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void Die()
     {
+        Score_Counter.score += killscore;
         Destroy(gameObject);
     }
 }
